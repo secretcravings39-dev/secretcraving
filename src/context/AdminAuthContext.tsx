@@ -8,6 +8,7 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
+import { API_BASE_URL } from "@/lib/config";
 
 interface Admin {
   email: string;
@@ -35,7 +36,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
       return;
     }
-    fetch("/api/admin/me", {
+    fetch(`${API_BASE_URL}/admin/me`, {
       headers: { Authorization: `Bearer ${saved}` },
     })
       .then((r) => {
@@ -54,7 +55,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(async (email: string, password: string) => {
     try {
-      const res = await fetch("/api/admin/login", {
+      const res = await fetch(`${API_BASE_URL}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

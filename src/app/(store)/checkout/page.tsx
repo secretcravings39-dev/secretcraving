@@ -54,6 +54,7 @@ export default function CheckoutPage() {
       subtotal: total,
       shipping: shippingCost === 0 ? "Free" : `Rs. ${shippingCost}`,
       total: orderTotal,
+      paymentMethod,
     };
 
     try {

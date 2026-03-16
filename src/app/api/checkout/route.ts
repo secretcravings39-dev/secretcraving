@@ -5,24 +5,35 @@ export async function POST(request: Request) {
   try {
     const {
       email, firstName, lastName, address, apartment,
-      city, state, postalCode, phone, orderItems, subtotal, shipping, total,
+      city, state, postalCode, phone, orderItems,
+      subtotal, shipping, total, paymentMethod,
     } = await request.json();
 
     if (!email || !firstName || !lastName || !address || !city || !phone) {
       return NextResponse.json({ error: "Please fill in all required fields." }, { status: 400 });
     }
 
+    if (!orderItems || orderItems.length === 0) {
+      return NextResponse.json({ error: "Cart is empty." }, { status: 400 });
+    }
+
     const order = {
-      contact: { email },
+      contact: { email: email.toLowerCase().trim() },
       deliveryAddress: {
-        firstName, lastName, address,
-        apartment: apartment || "",
-        city, state: state || "", postalCode: postalCode || "", phone,
+        firstName: firstName.trim(),
+        lastName: lastName.trim(),
+        address: address.trim(),
+        apartment: (apartment || "").trim(),
+        city: city.trim(),
+        state: (state || "").trim(),
+        postalCode: (postalCode || "").trim(),
+        phone: phone.trim(),
       },
-      orderItems: orderItems || [],
-      subtotal,
+      orderItems,
+      subtotal: Number(subtotal),
       shipping: shipping || "Free",
-      total,
+      total: Number(total),
+      paymentMethod: paymentMethod || "cod",
       status: "pending",
       notes: [],
       createdAt: new Date(),

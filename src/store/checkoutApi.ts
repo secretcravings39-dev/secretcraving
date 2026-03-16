@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_BASE_URL } from "@/lib/config";
 
 interface OrderItem {
   name: string;
@@ -23,6 +24,7 @@ interface CheckoutRequest {
   subtotal: number;
   shipping: string;
   total: number;
+  paymentMethod: string;
 }
 
 interface CheckoutResponse {
@@ -47,6 +49,7 @@ export interface Order {
   subtotal: number;
   shipping: string;
   total: number;
+  paymentMethod?: string;
   status: string;
   createdAt: string;
   updatedAt?: string;
@@ -54,7 +57,10 @@ export interface Order {
 
 export const checkoutApi = createApi({
   reducerPath: "checkoutApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: API_BASE_URL,
+  }),
+  tagTypes: ["Order"],
   endpoints: (builder) => ({
     placeOrder: builder.mutation<CheckoutResponse, CheckoutRequest>({
       query: (order) => ({
@@ -62,9 +68,11 @@ export const checkoutApi = createApi({
         method: "POST",
         body: order,
       }),
+      invalidatesTags: ["Order"],
     }),
     getOrder: builder.query<Order, string>({
-      query: (id) => `/orders/${id}`,
+      query: (id) => `/checkout/${id}`,
+      providesTags: (_result, _err, id) => [{ type: "Order", id }],
     }),
   }),
 });
