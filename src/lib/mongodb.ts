@@ -1,19 +1,25 @@
 import { MongoClient, Db } from "mongodb";
 
-const MONGO_URI = process.env.MONGO_URI!;
+const MONGO_URI = process.env.MONGO_URI;
 const DB_NAME = process.env.DB_NAME || "elvevier";
 
-let cached: { client: MongoClient; db: Db } | null = null;
+if (!MONGO_URI) {
+  throw new Error("MONGO_URI environment variable is not set.");
+}
+
+const globalForMongo = globalThis as unknown as {
+  _mongoClientPromise?: Promise<MongoClient>;
+};
+
+const clientPromise: Promise<MongoClient> =
+  globalForMongo._mongoClientPromise ??
+  new MongoClient(MONGO_URI).connect();
+
+if (process.env.NODE_ENV !== "production") {
+  globalForMongo._mongoClientPromise = clientPromise;
+}
 
 export async function getDb(): Promise<Db> {
-  if (cached) return cached.db;
-
-  const client = new MongoClient(MONGO_URI, {
-    tls: true,
-    serverSelectionTimeoutMS: 10000,
-  });
-  await client.connect();
-  const db = client.db(DB_NAME);
-  cached = { client, db };
-  return db;
+  const client = await clientPromise;
+  return client.db(DB_NAME);
 }
