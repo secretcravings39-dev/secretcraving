@@ -1,5 +1,5 @@
 /**
- * All images from src/assets, served from public/Evlevier after copy.
+ * All images from src/assets, served from public/kairo after copy.
  * Use these paths across the site so every asset is used.
  */
 const K = "/kairo";

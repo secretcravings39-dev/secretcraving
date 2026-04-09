@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Returns & Exchanges – Evlevier",
+  title: "Returns & Exchanges – Private Room",
   description:
-    "How to return or exchange your Evlevier order. Easy process within 14 days.",
+    "How to return or exchange your Private Room order. Easy process within 14 days.",
 };
 
 const steps = [

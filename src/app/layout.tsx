@@ -18,7 +18,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Evlevier – Cozy Fashion for Everyone",
+  title: "Private Room – Cozy Fashion for Everyone",
   description:
     "Men's, women's & kids clothing, shoes, belts, caps, bags and more. Free shipping on orders above Rs. 2,500.",
   icons: {

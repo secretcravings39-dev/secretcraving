@@ -88,11 +88,11 @@ export function Header() {
           <Link
             href="/"
             className="absolute left-1/2 -translate-x-1/2 flex items-center transition-all duration-300 hover:scale-105"
-            aria-label="Evlevier home"
+            aria-label="Private Room home"
           >
             <Image
               src={assets.logo}
-              alt="Evlevier"
+              alt="Private Room"
               width={140}
               height={48}
               className="h-9 w-auto md:h-11 object-contain"

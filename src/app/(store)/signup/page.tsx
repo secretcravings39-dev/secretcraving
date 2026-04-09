@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Sign up – Evlevier",
-  description: "Create your Evlevier account for faster checkout and order tracking.",
+  title: "Sign up – Private Room",
+  description: "Create your Private Room account for faster checkout and order tracking.",
 };
 
 export default function SignupPage() {

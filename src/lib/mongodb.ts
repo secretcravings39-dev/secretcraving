@@ -1,7 +1,7 @@
 import { MongoClient, Db } from "mongodb";
 
 const MONGO_URI = process.env.MONGO_URI;
-const DB_NAME = process.env.DB_NAME || "elvevier";
+const DB_NAME = process.env.DB_NAME || "privateroom";
 
 const globalForMongo = globalThis as unknown as {
   _mongoClientPromise?: Promise<MongoClient>;

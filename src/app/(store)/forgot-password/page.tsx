@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Forgot password – Evlevier",
-  description: "Reset your Evlevier account password.",
+  title: "Forgot password – Private Room",
+  description: "Reset your Private Room account password.",
 };
 
 export default function ForgotPasswordPage() {
