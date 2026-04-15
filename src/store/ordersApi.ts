@@ -17,6 +17,8 @@ export interface OrderItem {
   price: number;
   quantity: number;
   size?: string;
+  /** Product main image URL (saved at checkout). */
+  image?: string;
 }
 
 export interface OrderNote {

@@ -2,6 +2,7 @@
 
 import { use } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useGetOrderQuery } from "@/store/checkoutApi";
 
 function formatPrice(price: number) {
@@ -213,10 +214,20 @@ export default function OrderDetailPage({
           {order.orderItems.map((item, i) => (
             <div key={i} className="flex items-center justify-between py-4 first:pt-0 last:pb-0">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-lg bg-[var(--cream)] flex items-center justify-center text-[var(--muted)]">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
+                <div className="relative w-12 h-12 shrink-0 rounded-lg bg-[var(--cream)] overflow-hidden flex items-center justify-center text-[var(--muted)]">
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      className="object-contain object-center"
+                      sizes="48px"
+                    />
+                  ) : (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                  )}
                 </div>
                 <div>
                   <p className="text-sm font-medium text-[var(--foreground)]">{item.name}</p>
