@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-import { navCategories } from "@/data/categories";
+import { headerNavCategories } from "@/data/categories";
 import { assets } from "@/data/assets";
 import { useState } from "react";
 
@@ -15,79 +15,75 @@ export function Header() {
   const [profileOpen, setProfileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-[var(--background)]/90 backdrop-blur-xl border-b border-[var(--border)]/60 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Promo bar */}
-        <div className="hidden sm:flex items-center justify-center py-2 text-xs tracking-wide text-[var(--muted)] animate-fade-down">
-          <span className="flex items-center gap-1.5">
-            <svg className="w-3.5 h-3.5 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-            </svg>
-            Free shipping on orders above Rs. 2,500
-          </span>
-        </div>
-
-        <div className="flex items-center justify-between h-16 md:h-[72px] animate-fade-down animation-delay-100">
-          {/* Mobile hamburger */}
-          <button
-            type="button"
-            className="md:hidden p-2 -ml-2 rounded-lg hover:bg-[var(--cream)] transition-colors"
-            onClick={() => setMenuOpen((o) => !o)}
-            aria-label="Menu"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+    <header className="sticky top-0 z-40 transition-all duration-300">
+      <div
+        className="h-[3px] bg-gradient-to-r from-[var(--accent)]/15 via-[var(--accent)]/55 to-[var(--accent)]/15 shadow-[0_1px_12px_rgba(166,124,82,0.35)]"
+        aria-hidden
+      />
+      <div className="border-b border-[var(--border)]/40 bg-gradient-to-b from-[var(--cream)]/25 via-[var(--background)]/95 to-[var(--background)]/90 backdrop-blur-2xl backdrop-saturate-[1.35] shadow-[0_8px_32px_-12px_rgba(44,40,37,0.14),inset_0_1px_0_0_rgba(255,255,255,0.72)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-center h-[64px] md:h-[72px] w-full gap-2 md:gap-5 animate-fade-down animation-delay-100">
+          {/* Left: mobile menu + desktop nav */}
+          <div className="flex items-center min-w-0 flex-1">
+            <button
+              type="button"
+              className="md:hidden p-2.5 -ml-1 rounded-full border border-transparent hover:border-[var(--border)]/80 hover:bg-[var(--cream)]/90 hover:shadow-sm transition-all duration-200 shrink-0"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label="Menu"
             >
-              {menuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
-            {navCategories.map((cat) => (
-              <div
-                key={cat.id}
-                className="relative"
-                onMouseEnter={() => setOpenNavId(cat.id)}
-                onMouseLeave={() => setOpenNavId(null)}
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <Link
-                  href={`/${cat.slug}`}
-                  className="px-3.5 py-2 text-[14px] font-medium text-[var(--foreground)] hover:text-[var(--accent)] rounded-lg hover:bg-[var(--cream)]/60 transition-all duration-200"
-                >
-                  {cat.name}
-                </Link>
-                {openNavId === cat.id && (
-                  <div className="absolute left-0 top-full pt-2 animate-scale-in">
-                    <div className="bg-[var(--card)] border border-[var(--border)] rounded-xl shadow-lg shadow-[var(--shadow-warm)] py-2 min-w-[220px]">
-                      {cat.children.map((child) => (
-                        <Link
-                          key={child.slug}
-                          href={`/${child.slug}`}
-                          className="flex items-center px-4 py-2.5 text-sm text-[var(--foreground)] hover:bg-[var(--cream)] hover:text-[var(--accent)] transition-colors rounded-lg mx-1"
-                          onClick={() => setOpenNavId(null)}
-                        >
-                          {child.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+                {menuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h16" />
                 )}
-              </div>
-            ))}
-          </nav>
+              </svg>
+            </button>
 
-          {/* Logo */}
+            <nav className="hidden md:flex items-center gap-1 min-w-0">
+              {headerNavCategories.map((cat) => (
+                <div
+                  key={cat.id}
+                  className="relative"
+                  onMouseEnter={() => setOpenNavId(cat.id)}
+                  onMouseLeave={() => setOpenNavId(null)}
+                >
+                  <Link
+                    href={`/${cat.slug}`}
+                    className="nav-link-luxury relative px-3.5 py-2 text-[13px] font-semibold tracking-[0.04em] text-[var(--foreground)]/92 hover:text-[var(--accent-hover)] rounded-full bg-transparent hover:bg-gradient-to-b hover:from-[var(--cream)] hover:to-[var(--cream-dark)]/35 hover:shadow-sm transition-all duration-200 whitespace-nowrap"
+                  >
+                    {cat.name}
+                  </Link>
+                  {openNavId === cat.id && (
+                    <div className="absolute left-0 top-full pt-2.5 animate-scale-in z-30">
+                      <div className="overflow-hidden rounded-2xl border border-[var(--border)]/80 bg-[var(--card)]/98 py-2 shadow-2xl shadow-[var(--shadow-warm-md)] ring-1 ring-[var(--accent)]/10 backdrop-blur-xl min-w-[210px]">
+                        {cat.children.map((child) => (
+                          <Link
+                            key={child.slug}
+                            href={`/${child.slug}`}
+                            className="flex items-center px-4 py-2.5 text-sm text-[var(--foreground)]/95 hover:bg-gradient-to-r hover:from-[var(--cream)] hover:to-[var(--cream)]/70 hover:text-[var(--accent)] transition-colors rounded-xl mx-1.5"
+                            onClick={() => setOpenNavId(null)}
+                          >
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </nav>
+          </div>
+
+          {/* Center: logo (no absolute positioning — avoids overlap) */}
           <Link
             href="/"
-            className="absolute left-1/2 -translate-x-1/2 flex items-center transition-all duration-300 hover:scale-105"
+            className="shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-white via-[var(--card)] to-[var(--cream)]/80 p-2 ring-1 ring-[var(--accent-soft)]/25 shadow-[0_10px_36px_-12px_rgba(166,124,82,0.35),inset_0_1px_0_0_rgba(255,255,255,0.9)]"
             aria-label="Private Room home"
           >
             <Image
@@ -95,48 +91,49 @@ export function Header() {
               alt="Private Room"
               width={140}
               height={48}
-              className="h-9 w-auto md:h-11 object-contain"
+              className="h-7 w-auto md:h-[2.35rem] object-contain max-w-[min(44vw,168px)] drop-shadow-[0_1px_2px_rgba(44,40,37,0.08)]"
               priority
               unoptimized
             />
           </Link>
 
-          {/* Desktop actions */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Right: actions */}
+          <div className="hidden md:flex items-center justify-end gap-2.5 flex-1 min-w-0">
             <Link
               href="/login"
-              className="px-3 py-2 text-sm font-medium text-[var(--foreground)] hover:text-[var(--accent)] rounded-lg hover:bg-[var(--cream)]/60 transition-all duration-200"
+              className="px-5 py-2.5 text-sm font-semibold text-[var(--foreground)] rounded-full border border-[var(--border)]/70 bg-gradient-to-b from-[var(--card)] to-[var(--cream)]/40 hover:border-[var(--accent)]/45 hover:from-[var(--cream)] hover:to-[var(--cream-dark)]/25 hover:text-[var(--accent)] hover:shadow-md transition-all duration-200 shadow-sm"
             >
               Login
             </Link>
-            <Link
-              href="/search"
-              className="p-2.5 rounded-xl hover:bg-[var(--cream)] transition-colors duration-200"
-              aria-label="Search"
-            >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </Link>
-            <button
-              type="button"
-              className="relative p-2.5 rounded-xl hover:bg-[var(--cream)] transition-colors duration-200"
-              onClick={openCart}
-              aria-label="Cart"
-            >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-              {itemCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-[18px] h-[18px] rounded-full bg-[var(--accent)] text-white text-[10px] font-semibold flex items-center justify-center ring-2 ring-[var(--background)]">
-                  {itemCount > 99 ? "99+" : itemCount}
-                </span>
-              )}
-            </button>
+            <div className="flex items-center gap-0.5 rounded-full border border-[var(--border)]/55 bg-gradient-to-b from-white to-[var(--cream)]/70 p-1 pl-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.85),0_4px_14px_-4px_rgba(44,40,37,0.12)]">
+              <Link
+                href="/search"
+                className="p-2.5 rounded-full text-[var(--foreground)]/88 hover:bg-[var(--card)] hover:text-[var(--accent)] hover:shadow-sm transition-all duration-200"
+                aria-label="Search"
+              >
+                <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </Link>
+              <button
+                type="button"
+                className="relative p-2.5 rounded-full text-[var(--foreground)]/88 hover:bg-[var(--card)] hover:text-[var(--accent)] hover:shadow-sm transition-all duration-200"
+                onClick={openCart}
+                aria-label="Cart"
+              >
+                <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                {itemCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-0.5 rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-hover)] text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-white shadow-md">
+                    {itemCount > 99 ? "99+" : itemCount}
+                  </span>
+                )}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile profile */}
-          <div className="relative md:hidden">
+          <div className="relative md:hidden flex-1 flex justify-end">
             <button
               type="button"
               onClick={() => setProfileOpen((o) => !o)}
@@ -194,13 +191,13 @@ export function Header() {
         {menuOpen && (
           <>
             <div
-              className="fixed inset-0 top-16 bg-black/30 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 top-[64px] sm:top-[104px] bg-black/35 backdrop-blur-sm z-40 md:hidden"
               aria-hidden
               onClick={() => setMenuOpen(false)}
             />
-            <div className="fixed top-16 left-0 right-0 z-50 md:hidden max-h-[70vh] overflow-y-auto bg-[var(--card)] border-b border-[var(--border)] shadow-xl animate-fade-down rounded-b-2xl">
+            <div className="fixed top-[64px] sm:top-[104px] left-0 right-0 z-50 md:hidden max-h-[70vh] overflow-y-auto bg-[var(--card)] border-b border-[var(--border)] shadow-xl shadow-[var(--shadow-warm-md)] animate-fade-down rounded-b-2xl ring-1 ring-[var(--border)]/30">
               <nav className="py-3 px-4 space-y-0.5">
-                {navCategories.map((cat) => {
+                {headerNavCategories.map((cat) => {
                   const isSubOpen = openMobileSubId === cat.id;
                   const hasChildren = cat.children.length > 0;
                   return (
@@ -256,6 +253,7 @@ export function Header() {
             </div>
           </>
         )}
+        </div>
       </div>
     </header>
   );

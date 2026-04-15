@@ -51,7 +51,7 @@ export default function SearchPage() {
                 src={product.image}
                 alt={product.name}
                 fill
-                className="object-cover group-hover:scale-105 transition"
+                className="object-contain object-center group-hover:opacity-95 transition"
                 sizes="(max-width: 640px) 50vw, 33vw"
               />
             </div>

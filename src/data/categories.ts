@@ -1,28 +1,130 @@
 import type { Category } from "@/types";
 
 export const categories: Category[] = [
-  { id: "women", name: "Woman", slug: "women", description: "Women's fashion" },
-  { id: "men", name: "Man", slug: "men", description: "Men's fashion" },
-  { id: "kids", name: "Kids", slug: "kids", description: "Children's wear" },
-  { id: "shoes", name: "Shoes", slug: "shoes", description: "Footwear for all" },
+  {
+    id: "wellness",
+    name: "Wellness",
+    slug: "wellness",
+    description:
+      "Lubricants, intimate washes, delay condoms, and personal care items we stock and ship nationwide.",
+  },
   {
     id: "accessories",
-    name: "Accessories",
+    name: "Massage & devices",
     slug: "accessories",
-    description: "Belts, caps, bags & more",
+    description:
+      "Vibrators, sleeves, rings, and other adult novelty devices from brands and listings shown on each product page.",
   },
-  { id: "belts", name: "Belts", slug: "belts", description: "Belts" },
-  { id: "caps", name: "Caps & Headwear", slug: "caps", description: "Caps and hats" },
-  { id: "bags", name: "Bags", slug: "bags", description: "Handbags & more" },
   {
     id: "fragrance",
-    name: "Fragrance & Living",
+    name: "Oils & supplements",
     slug: "fragrance",
-    description: "Perfumes & self-care",
+    description:
+      "Massage and body oils plus oral drops and supplements (e.g. Spanische Fliege) sold as labeled.",
+  },
+  {
+    id: "women",
+    name: "Woman",
+    slug: "women",
+    description: "Reserved for future fashion drops — browse Wellness for current stock.",
+  },
+  {
+    id: "men",
+    name: "Man",
+    slug: "men",
+    description: "Reserved for future fashion drops — browse Wellness for current stock.",
+  },
+  {
+    id: "kids",
+    name: "Kids",
+    slug: "kids",
+    description: "Reserved for future kids’ lines — not part of the adult wellness catalogue.",
+  },
+  {
+    id: "shoes",
+    name: "Shoes",
+    slug: "shoes",
+    description: "Reserved category — no footwear listed at this time.",
+  },
+  {
+    id: "belts",
+    name: "Belts",
+    slug: "belts",
+    description: "Reserved category — no belts listed at this time.",
+  },
+  {
+    id: "caps",
+    name: "Caps & Headwear",
+    slug: "caps",
+    description: "Reserved category — no caps listed at this time.",
+  },
+  {
+    id: "bags",
+    name: "Bags",
+    slug: "bags",
+    description: "Reserved category — no bags listed at this time.",
   },
 ];
 
+/** Primary links in the site header only — keep this short so the logo does not overlap. */
+export const headerNavCategories = [
+  {
+    id: "wellness",
+    name: "Wellness",
+    slug: "wellness",
+    children: [
+      { name: "New In", slug: "wellness?filter=new" },
+      { name: "All wellness", slug: "wellness" },
+    ],
+  },
+  {
+    id: "accessories",
+    name: "Devices",
+    slug: "accessories",
+    children: [
+      { name: "New In", slug: "accessories?filter=new" },
+      { name: "All devices", slug: "accessories" },
+    ],
+  },
+  {
+    id: "fragrance",
+    name: "Oils",
+    slug: "fragrance",
+    children: [
+      { name: "New In", slug: "fragrance?filter=new" },
+      { name: "All oils & supplements", slug: "fragrance" },
+    ],
+  },
+] as const;
+
 export const navCategories = [
+  {
+    id: "wellness",
+    name: "Wellness",
+    slug: "wellness",
+    children: [
+      { name: "New In", slug: "wellness?filter=new" },
+      { name: "All wellness", slug: "wellness" },
+    ],
+  },
+  {
+    id: "accessories",
+    name: "Massage & devices",
+    slug: "accessories",
+    children: [
+      { name: "New In", slug: "accessories?filter=new" },
+      { name: "All devices", slug: "accessories" },
+    ],
+  },
+  {
+    id: "fragrance",
+    name: "Oils & supplements",
+    slug: "fragrance",
+    children: [
+      { name: "New In", slug: "fragrance?filter=new" },
+      { name: "All", slug: "fragrance" },
+    ],
+  },
   {
     id: "women",
     name: "Woman",
@@ -75,17 +177,6 @@ export const navCategories = [
       { name: "Woman", slug: "shoes/women" },
       { name: "Man", slug: "shoes/men" },
       { name: "Kids", slug: "shoes/kids" },
-    ],
-  },
-  {
-    id: "accessories",
-    name: "Accessories",
-    slug: "accessories",
-    children: [
-      { name: "Belts", slug: "belts" },
-      { name: "Caps", slug: "caps" },
-      { name: "Bags", slug: "bags" },
-      { name: "Eyewear", slug: "accessories/eyewear" },
     ],
   },
 ];

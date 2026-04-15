@@ -6,7 +6,6 @@ import {
   getProductsByCategory,
 } from "@/data/products";
 import { categories } from "@/data/categories";
-import { navCategories } from "@/data/categories";
 
 type Props = {
   params: Promise<{ category: string; subcategory: string }>;

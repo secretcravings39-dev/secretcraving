@@ -50,7 +50,7 @@ export default function CartPage() {
                     src={item.product.image}
                     alt={item.product.name}
                     fill
-                    className="object-cover"
+                    className="object-contain object-center"
                     sizes="112px"
                   />
                 </div>

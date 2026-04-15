@@ -1,14 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { assets } from "@/data/assets";
+import { NewsletterSignup } from "@/components/NewsletterSignup";
 
 const footerLinks = {
   shop: [
+    { label: "Wellness", href: "/wellness" },
+    { label: "Massage & devices", href: "/accessories" },
+    { label: "Oils & supplements", href: "/fragrance" },
     { label: "Women", href: "/women" },
     { label: "Men", href: "/men" },
-    { label: "Kids", href: "/kids" },
-    { label: "Shoes", href: "/shoes" },
-    { label: "Accessories", href: "/accessories" },
   ],
   help: [
     { label: "About Us", href: "/about" },
@@ -42,8 +43,8 @@ export function Footer() {
               />
             </Link>
             <p className="mt-5 text-sm text-[var(--muted)] max-w-xs leading-relaxed">
-              Cozy fashion for everyone. Quality clothing, shoes and accessories
-              crafted with care for men, women and kids.
+              Discreet intimate wellness, oils, and body-safe accessories — with
+              the same care we put into every order.
             </p>
             {/* Social icons */}
             <div className="mt-6 flex items-center gap-3">
@@ -81,6 +82,12 @@ export function Footer() {
                 </svg>
               </a>
             </div>
+            <div className="mt-8">
+              <h4 className="font-semibold text-xs uppercase tracking-[0.2em] text-[var(--accent-soft)] mb-3">
+                Newsletter
+              </h4>
+              <NewsletterSignup />
+            </div>
           </div>
 
           {/* Shop links */}
@@ -105,7 +112,7 @@ export function Footer() {
           {/* Help links */}
           <div className="md:col-span-3 animate-fade-up animation-delay-200">
             <h4 className="font-semibold text-xs uppercase tracking-[0.2em] text-[var(--accent-soft)] mb-5">
-              Customer Service
+              Customer services
             </h4>
             <ul className="space-y-3">
               {footerLinks.help.map((link) => (

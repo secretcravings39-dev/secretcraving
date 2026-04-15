@@ -282,6 +282,20 @@ img {
   50% { opacity: 0.7; }
 }
 
+@keyframes hero-ken {
+  0%,
+  100% {
+    transform: scale(1.06);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+.animate-hero-ken {
+  animation: hero-ken 32s ease-in-out infinite;
+}
+
 /* Animation utility classes */
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
@@ -316,4 +330,25 @@ img {
 }
 .bg-warm-radial {
   background: radial-gradient(ellipse at top, var(--cream) 0%, var(--background) 70%);
+}
+
+/* Nav link underline (header) */
+.nav-link-luxury {
+  position: relative;
+}
+.nav-link-luxury::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+  transform: translateX(-50%);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.95;
+}
+.nav-link-luxury:hover::after {
+  width: calc(100% - 22px);
 }

@@ -18,9 +18,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Private Room – Cozy Fashion for Everyone",
+  title: "Private Room – Intimate wellness & body-safe devices",
   description:
-    "Men's, women's & kids clothing, shoes, belts, caps, bags and more. Free shipping on orders above Rs. 2,500.",
+    "Shop personal lubricants, protection, oils, supplements, and body-safe adult devices in Pakistan. Discreet packing. Free shipping on orders above Rs. 4,999.",
   icons: {
     icon: "/kairo/favicon.png",
     apple: "/kairo/favicon.png",

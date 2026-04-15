@@ -1,4 +1,5 @@
 export type CategoryId =
+  | "wellness"
   | "women"
   | "men"
   | "kids"
@@ -32,6 +33,10 @@ export interface Product {
   description?: string;
   featured?: boolean;
   new?: boolean;
+  /** “15 sold in last 4 hours” style social proof (illustrative). */
+  soldLast?: { count: number; hours: number };
+  /** “46 people looking at this product” style urgency (illustrative). */
+  viewersLooking?: number;
 }
 
 export interface CartItem {

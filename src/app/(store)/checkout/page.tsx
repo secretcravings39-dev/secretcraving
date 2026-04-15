@@ -5,12 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { usePlaceOrderMutation } from "@/store/checkoutApi";
+import { sitePromo } from "@/data/site";
 
 function formatPrice(price: number) {
   return `Rs. ${price.toLocaleString()}`;
 }
 
-const SHIPPING_THRESHOLD = 2500;
+const SHIPPING_THRESHOLD = sitePromo.freeShippingMin;
 
 type PaymentMethod = "card" | "cod";
 
@@ -322,7 +323,7 @@ export default function CheckoutPage() {
                 {items.map((item) => (
                   <li key={`${item.product.id}-${item.size ?? ""}`} className="flex gap-3 border-b border-[var(--border)] pb-4 last:border-0">
                     <div className="relative w-16 h-20 rounded-lg overflow-hidden bg-[var(--cream)] shrink-0">
-                      <Image src={item.product.image} alt={item.product.name} fill className="object-cover" sizes="64px" />
+                      <Image src={item.product.image} alt={item.product.name} fill className="object-contain object-center" sizes="64px" />
                       <span className="absolute bottom-0 right-0 bg-[var(--foreground)] text-[var(--cream)] text-[10px] w-5 h-5 flex items-center justify-center rounded-tl">{item.quantity}</span>
                     </div>
                     <div className="flex-1 min-w-0">

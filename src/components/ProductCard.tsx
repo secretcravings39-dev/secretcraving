@@ -34,12 +34,21 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             src={product.image}
             alt={product.name}
             fill
-            className="object-cover transition-all duration-500 group-hover:scale-[1.06]"
+            className="object-contain object-center transition-opacity duration-300 group-hover:opacity-95"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
           {/* Hover overlay */}
           <div className="absolute inset-0 bg-[var(--foreground)]/0 group-hover:bg-[var(--foreground)]/10 transition-colors duration-300" />
-          {product.new && (
+          {product.compareAtPrice != null &&
+            product.compareAtPrice > product.price && (
+              <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold bg-[var(--accent)] text-[var(--foreground)] rounded-full">
+                Sale
+              </span>
+            )}
+          {product.new && !(
+            product.compareAtPrice != null &&
+            product.compareAtPrice > product.price
+          ) && (
             <span className="absolute top-3 left-3 px-2.5 py-1 text-[10px] uppercase tracking-wider font-semibold bg-[var(--foreground)] text-[var(--cream)] rounded-full">
               New
             </span>
@@ -56,7 +65,17 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
           <h3 className="font-medium text-[var(--foreground)] text-sm mt-1 line-clamp-2 leading-snug group-hover:text-[var(--accent)] transition-colors duration-200">
             {product.name}
           </h3>
-          <p className="text-sm font-semibold mt-1.5 text-[var(--foreground)]">{formatPrice(product.price)}</p>
+          <div className="mt-1.5 flex flex-wrap items-baseline gap-2">
+            <p className="text-sm font-semibold text-[var(--foreground)]">
+              {formatPrice(product.price)}
+            </p>
+            {product.compareAtPrice != null &&
+              product.compareAtPrice > product.price && (
+                <p className="text-xs text-[var(--muted)] line-through">
+                  {formatPrice(product.compareAtPrice)}
+                </p>
+              )}
+          </div>
         </div>
       </Link>
       <div className="px-0.5 mt-2.5">
